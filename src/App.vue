@@ -1,25 +1,10 @@
 <script setup>
-	import { ref } from "vue";
+	import { useCatStore } from "./store/catStore.js";
+	import CatCard from "./components/CatCard.vue";
 
-	const cats = ref([]);
+	const store = useCatStore();
 
-	async function getCats() {
-		let res = await fetch(
-			"https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1",
-			{
-				method: "GET",
-				headers: {
-					"x-api-key": import.meta.env.VITE_CAT_API_KEY,
-				},
-			}
-		).then((resp) => {
-			return resp.json();
-		});
-
-		cats.value = await res;
-	}
-
-	getCats();
+	store.getCats();
 </script>
 
 <template>
@@ -59,28 +44,13 @@
 				ease-in-out
 				mb-8
 			"
-			@click="getCats"
+			@click="store.getCats"
 		>
 			Get More Cats!
 		</button>
-		<div class="grid grid-cols-5 gap-4">
-			<div
-				v-for="cat in cats"
-				:key="cat.id"
-				class="rounded-lg shadow-lg bg-white max-w-sm"
-			>
-				<a href="#!">
-					<img class="rounded-t-lg" :src="cat.url" alt="cat-image" />
-				</a>
-				<div class="p-6">
-					<h5 class="text-gray-900 text-xl font-medium mb-2">
-						{{ cat.breeds[0].name }}
-					</h5>
-					<p class="text-gray-700 text-base mb-4">
-						{{ cat.breeds[0].origin }}
-					</p>
-				</div>
-			</div>
+		<div v-if="store.loading">Getting more cats...</div>
+		<div v-else class="grid grid-cols-5 gap-4">
+			<CatCard v-for="cat in store.cats" :key="cat.id" :cat="cat" />
 		</div>
 	</div>
 </template>
