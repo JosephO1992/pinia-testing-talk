@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 export const useCatStore = defineStore("catStore", () => {
 	const cats = ref([]);
+	const catInBasket = ref({});
 	const loading = ref(false);
 	async function getCats() {
 		loading.value = true;
@@ -25,5 +26,9 @@ export const useCatStore = defineStore("catStore", () => {
 		cats.value = await res;
 	}
 
-	return { cats, getCats, loading };
+	function addCatToBasket(cat) {
+		catInBasket.value = cat;
+	}
+
+	return { cats, getCats, loading, addCatToBasket, catInBasket };
 });
