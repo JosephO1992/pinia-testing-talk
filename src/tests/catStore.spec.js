@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { setActivePinia, createPinia } from "pinia";
-import { useCatStore } from "../store/catStore.js";
+import { useCatStore } from "@/store/catStore.js";
 
 describe("initial cat store tests", () => {
 	let store = null;

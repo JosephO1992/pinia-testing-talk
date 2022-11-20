@@ -13,6 +13,7 @@
 <template>
 	<div
 		class="rounded-lg shadow-lg bg-white max-w-sm h-96"
+		data-testId="cat-card"
 		:class="chosenCat ? 'shadow-white' : ''"
 	>
 		<div
@@ -29,6 +30,7 @@
 		</div>
 		<button
 			type="button"
+			data-testId="add-cat-button"
 			class="
 				inline-block
 				px-6
