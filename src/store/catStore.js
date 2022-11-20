@@ -23,12 +23,24 @@ export const useCatStore = defineStore("catStore", () => {
 				loading.value = false;
 			});
 
-		cats.value = await res;
+		const catsData = await res;
+		addCatsToBasket(catsData);
+	}
+
+	function addCatsToBasket(catsData) {
+		cats.value = catsData;
 	}
 
 	function addCatToBasket(cat) {
 		catInBasket.value = cat;
 	}
 
-	return { cats, getCats, loading, addCatToBasket, catInBasket };
+	return {
+		cats,
+		getCats,
+		loading,
+		addCatToBasket,
+		catInBasket,
+		addCatsToBasket,
+	};
 });
