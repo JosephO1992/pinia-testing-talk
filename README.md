@@ -1,8 +1,15 @@
-# Vue 3 + Vite
-
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 # pinia-testing-talk
+
+Set up:
+
+cp .env.example .env
+
+Get your own api key from https://thecatapi.com/ and copy that value into the VITE_CAT_API_KEY.
+
+cd into the directory.
+
+npm install.
+
+npm run dev.
+
+To run tests -> npm run test.
