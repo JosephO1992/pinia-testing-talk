@@ -25,7 +25,6 @@ describe("catCard.vue", () => {
 			global: {
 				plugins: [
 					createTestingPinia({
-						createSpy: vi.fn,
 						initialState: {
 							catStore: {
 								catInBasket: {
@@ -61,9 +60,12 @@ describe("catCard.vue", () => {
 		const button = wrapper.find('[data-testId="add-cat-button"]');
 		await button.trigger("click");
 		expect(store.addCatToBasket).toHaveBeenCalledOnce();
+		expect(store.addCatToBasket).toHaveBeenCalledWith(wrapper.vm.cat);
 	});
 	it('applies the "shadow-white" class when the same cat is in the catInBasket', () => {
+		const store = useCatStore();
 		const card = wrapper.get('[data-testId="cat-card"]');
 		expect(card.classes()).toContain("shadow-white");
+		expect(store.catInBasket).toEqual(wrapper.vm.cat);
 	});
 });
